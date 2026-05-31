@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>พรนภัส รามัญจิตร | Premium Graphic & 3D Portfolio</title>
+    
+    <!-- Google Fonts: Sarabun & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            light: '#FAF8F5',
+                            DEFAULT: '#F6F1E9',
+                            dark: '#EADBC8'
+                        },
+                        gold: {
+                            light: '#EADBC8',
+                            DEFAULT: '#D6C2A1',
+                            dark: '#BFA77D',
+                        },
+                        dark: {
+                            light: '#4F4F4F',
+                            DEFAULT: '#333333',
+                            darker: '#1A1A1A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Sarabun', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS การควบคุม Custom Scrollbar และความลื่นไหล */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F6F1E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D6C2A1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #BFA77D;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(214, 194, 161, 0.3);
+        }
+
+        .dark-glass-card {
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(214, 194, 161, 0.15);
+        }
+
+        /* Hero Text Fade up animation */
+        @keyframes fadeUpIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeUpIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        /* Cursor Glow Effect */
+        .cursor-glow {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(214, 194, 161, 0.18) 0%, rgba(214, 194, 161, 0) 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .cursor-glow { display: block; }
+        }
+    </style>
+</head>
+<body class="bg-cream text-dark font-sans overflow-x-hidden selection:bg-gold selection:text-dark">
+
+    <!-- CURSOR GLOW -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- LOADING SCREEN -->
+    <div id="loader" class="fixed inset-0 bg-dark-darker z-[99999] flex flex-col justify-center items-center transition-all duration-700 ease-in-out">
+        <div class="text-cream font-serif text-3xl md:text-5xl tracking-[0.2em] font-extrabold mb-6 animate-pulse">
+            PHONNAPHAT<span class="text-gold">.</span>R
+        </div>
+        <div class="w-48 h-[2px] bg-dark-light relative overflow-hidden rounded-full">
+            <div class="h-full bg-gold absolute left-0 top-0 w-full animate-[progress_1.8s_ease-in-out]" id="load-progress"></div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 border-b border-gold/10">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-serif font-black tracking-widest text-dark hover:text-gold-dark transition duration-300">
+                TIP<span class="text-gold">.</span>PHONNAPHAT
+            </a>
+            
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center space-x-10 text-sm font-semibold tracking-wider">
+                <a href="#hero" class="nav-link text-dark hover:text-gold-dark transition-all duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold after:transition-all hover:after:w-full">หน้าแรก</a>
+                <a href="#about" class="nav-link text-dark hover:text-gold-dark transition-all duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold after:transition-all hover:after:w-full">เกี่ยวกับเรา</a>
+                <a href="#resume" class="nav-link text-dark hover:text-gold-dark transition-all duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold after:transition-all hover:after:w-full">เรซูเม่</a>
+                <a href="#portfolio" class="nav-link text-dark hover:text-gold-dark transition-all duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold after:transition-all hover:after:w-full">ผลงานจริง</a>
+                <a href="#contact" class="nav-link text-dark hover:text-gold-dark transition-all duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-gold after:transition-all hover:after:w-full">ติดต่อเรา</a>
+            </div>
+
+            <div class="hidden lg:block">
+                <a href="#contact" class="px-6 py-2.5 bg-dark text-cream rounded-full text-xs font-bold uppercase tracking-widest border border-dark hover:bg-transparent hover:text-dark transition duration-500 shadow-md">Hire Me</a>
+            </div>
+
+            <!-- Hamburger Button (Mobile) -->
+            <button id="menu-btn" class="block lg:hidden text-dark focus:outline-none z-50">
+                <div class="w-6 h-0.5 bg-dark mb-1.5 transition-all duration-300" id="bar1"></div>
+                <div class="w-6 h-0.5 bg-dark mb-1.5 transition-all duration-300" id="bar2"></div>
+                <div class="w-6 h-0.5 bg-dark transition-all duration-300" id="bar3"></div>
+            </button>
+        </div>
+
+        <!-- Mobile Side Drawer -->
+        <div id="side-drawer" class="fixed inset-y-0 right-0 w-[80%] max-w-sm bg-dark-darker text-cream z-40 transform translate-x-full transition-transform duration-500 ease-in-out shadow-2xl p-10 flex flex-col justify-between">
+            <div class="space-y-8 mt-16 text-lg font-serif">
+                <a href="#hero" class="block py-2 hover:text-gold transition">หน้าแรก</a>
+                <a href="#about" class="block py-2 hover:text-gold transition">เกี่ยวกับเรา</a>
+                <a href="#resume" class="block py-2 hover:text-gold transition">เรซูเม่</a>
+                <a href="#portfolio" class="block py-2 hover:text-gold transition">ผลงานจริง</a>
+                <a href="#contact" class="block py-2 hover:text-gold transition">ติดต่อเรา</a>
+            </div>
+            <div class="border-t border-cream/10 pt-8">
+                <p class="text-xs text-cream/40 mb-4">CONNECT WITH ME</p>
+                <p class="text-sm text-gold">phonnaphatramanjit@gmail.com</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-[85vh] flex items-center pt-20 pb-12 overflow-hidden bg-dark-darker text-cream">
+        <!-- Background Decorative Orbs -->
+        <div class="absolute top-1/4 right-[-10%] w-[500px] h-[500px] rounded-full bg-gold/5 blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 left-[-10%] w-[400px] h-[400px] rounded-full bg-gold/5 blur-[100px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <!-- Hero Description -->
+            <div class="lg:col-span-7 space-y-4 text-center lg:text-left order-2 lg:order-1 animate-fade-up">
+                <span class="text-gold font-serif text-sm tracking-[0.4em] uppercase block font-semibold">Graphic Designer</span>
+                <h1 class="text-3xl md:text-5xl xl:text-6xl font-serif font-black leading-tight">
+                    พรนภัส รามัญจิตร<span class="text-gold font-sans font-light">.</span>
+                </h1>
+                
+                <div class="text-cream/75 max-w-xl text-sm md:text-base leading-relaxed mx-auto lg:mx-0 text-left space-y-2 bg-white/5 p-5 rounded-2xl border border-cream/10">
+                    <p class="font-bold text-gold text-base">ออกแบบภาพกราฟิก / ตัดต่อ / Motion ประสบการณ์ทั้งหมด 4 ปี 8 เดือน </p>
+                    <p class="font-bold text-gold text-base">ที่ทำงานปัจจุบัน Delite Dental Clinic 3 ปี</p>
+                    <p class="font-bold text-gold text-base">Scope of Work</p>
+                    <p class="font-semibold text-cream pt-1"><i class="fa-solid fa-circle-nodes text-gold mr-2"></i>ONLINE WORK</p>
+                    <p class="pl-4 text-sm">- ทำ Ads/ภาพ/คลิป สำหรับโฆษณาโปรโมทผ่านแพลตฟอร์มต่างๆ Facebook Ads / TikTok / IG / รูปสินค้าโปรโมทใน Website</p>
+                    <p class="pl-4 text-sm">- ยิง Line Ads (ทำภาพสำหรับ Broadcast และ Rich Menu)</p>
+                    <p class="pl-4 text-sm">- Infu Content (พูดโปรโมทคลิปต่างๆ)</p>
+                    <p class="pl-4 text-sm">- มีประสบการณ์ 3D (ช่วงมหาวิทยาลัย)</p>
+                    
+                    <p class="font-semibold text-cream pt-1"><i class="fa-solid fa-store text-gold mr-2"></i>OFFLINE WORK</p>
+                    <p class="pl-4 text-sm">- Poster Promote ในห้าง Central สื่อต่างๆ ในร้าน และ Digital Signage</p>
+
+                    <p class="pl-4 text-sm">- KPI สูงสุด งาน Vdo สำหรับยิง Ads 1 คลิป/วัน</p>
+                    <p class="pl-4 text-sm">- KPI สูงสุด งาน ภาพ สำหรับยิง Ads 2 ภาพ หรือ ภาพโพส 5 ภาพ/วัน (ขึ้นอยู่กับรายละเอียดของงาน) </p>
+                </div>
+        
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#portfolio" class="px-6 py-3 bg-gold hover:bg-gold-dark text-dark font-extrabold text-xs rounded-full tracking-widest uppercase transition duration-300 shadow-lg shadow-gold/20">
+                        ดูคลังผลงานจริง
+                    </a>
+                    <a href="#resume" class="px-6 py-3 bg-transparent hover:bg-cream/10 border border-cream/20 text-cream font-bold text-xs rounded-full tracking-widest uppercase transition duration-300">
+                        ประวัติอย่างย่อ
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image Wrapper -->
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2">
+                <div class="relative w-64 h-64 md:w-80 md:h-80">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-gold to-dark-light p-[3px] animate-[spin_10s_linear_infinite]">
+                        <div class="w-full h-full bg-dark-darker rounded-full"></div>
+                    </div>
+                    <div class="absolute inset-3 rounded-full overflow-hidden border-2 border-gold/20">
+                        <img src="https://i.postimg.cc/HsD3L0rT/382975.jpg" alt="พรนภัส รามัญจิตร" class="w-full h-full object-cover transition-all duration-700 hover:scale-105 hover:contrast-[1.05]">
+                    </div>
+                    <div class="absolute -bottom-2 -right-2 glass-card border border-gold/30 px-3 py-1.5 rounded-2xl flex items-center space-x-2 shadow-lg">
+                        <span class="flex h-2.5 w-2.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold"></span>
+                        </span>
+                        <span class="text-[10px] font-black tracking-widest uppercase text-dark">Graphic Designer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-16 relative">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <!-- Profile details & Background -->
+                <div class="lg:col-span-5" data-aos="fade-right">
+                    <div class="relative">
+                        <div class="absolute -top-4 -left-4 w-full h-full border border-gold rounded-3xl -z-10"></div>
+                        <img src="https://i.postimg.cc/SQYTtNhd/LINE-ALBUM-2023-7-3-260525-1.jpg" alt="พรนภัส รามัญจิตร" 
+                             class="rounded-3xl shadow-xl w-full h-[360px] md:h-[400px] object-cover">
+                    </div>
+                </div>
+
+                <!-- Bio & Achievements -->
+                <div class="lg:col-span-7 space-y-4" data-aos="fade-left">
+                    <span class="text-gold-dark font-serif text-xs tracking-[0.3em] uppercase block font-bold">เกี่ยวกับเรา</span>
+                    <h2 class="text-2xl md:text-4xl font-serif font-extrabold leading-tight text-dark">
+                        ประวัติและการศึกษา
+                    </h2>
+                    <p class="text-dark-light text-sm md:text-base leading-relaxed">
+                        สวัสดีค่ะ ทิพย์ (พรนภัส รามัญจิตร) อายุ 26 ปี สำเร็จการศึกษาในระดับปริญญาตรีหลักสูตร ศิลปบัณฑิต สาขาการออกแบบนิเทศศิลป์ คณะศิลปกรรมศาสตร์ มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (RMUTT) เกรดเฉลี่ยสะสม 3.46 (เกียรตินิยมอันดับ ๒)
+                    </p>
+
+                    <!-- ปุ่มติดตามช่องทางด่วน (OpenLink) -->
+                    <div class="pt-1 flex flex-wrap gap-3">
+                        <a href="https://www.openlink.co/tip.p.p" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 px-5 py-3 bg-white/85 hover:bg-gold-light/40 border border-gold/40 text-dark font-bold text-xs rounded-xl transition-all duration-300 shadow-sm group">
+                            <span class="flex h-2 w-2 relative">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-gold-dark"></span>
+                            </span>
+                            <span>ดูช่องทางการติดตามทั้งหมด (OpenLink)</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gold-dark transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                        </a>
+
+                        <!-- ปุ่มดาวน์โหลด Resume (คุมโทนเสมอกลืนเข้ากันอย่างประณีต) -->
+                        <a href="https://drive.google.com/file/d/1a5ASCOH68Dih1ebiiwqIhytJ8n7lOeJp/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-3 px-5 py-3 bg-white/85 hover:bg-gold-light/40 border border-gold/40 text-dark font-bold text-xs rounded-xl transition-all duration-300 shadow-sm group">
+                            <i class="fa-solid fa-file-pdf text-sm text-gold-dark"></i>
+                            <span>เปิดดูและดาวน์โหลด Resume (PDF)</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gold-dark transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                        </a>
+                    </div>
+
+                    <!-- Facts Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 bg-white/60 border border-gold/20 rounded-xl shadow-sm">
+                            <h3 class="text-xl font-serif font-bold text-dark mb-0.5">3 ปี</h3>
+                            <p class="text-[9px] text-dark-light uppercase font-semibold tracking-wider">ตำแหน่งกราฟิก บริษัท ดีไลท์ ทันตกรรม</p>
+                        </div>
+                        <div class="p-4 bg-white/60 border border-gold/20 rounded-xl shadow-sm">
+                            <h3 class="text-xl font-serif font-bold text-dark mb-0.5">1 ปี 8 เดือน</h3>
+                            <p class="text-[9px] text-dark-light uppercase font-semibold tracking-wider">ตำแหน่งกราฟิก บริษัท APVC BESSER</p>
+                        </div>
+                        <div class="p-4 bg-white/60 border border-gold/20 rounded-xl shadow-sm col-span-2 sm:col-span-1">
+                            <h3 class="text-xl font-serif font-bold text-dark mb-0.5">3D Work</h3>
+                            <p class="text-[9px] text-dark-light uppercase font-semibold tracking-wider">3D Generalist ฝึกงานมหาลัย</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUME SECTION -->
+    <section id="resume" class="bg-white py-16 border-y border-gold/15 relative">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
+                <span class="text-gold-dark font-serif text-xs tracking-[0.3em] uppercase block font-bold">ไทม์ไลน์และประวัติย่อ</span>
+                <h2 class="text-2xl md:text-4xl font-serif font-bold mt-1">Resume & Experience</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Education Column -->
+                <div class="lg:col-span-6 space-y-6" data-aos="fade-right">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-cream rounded-xl border border-gold/40 flex items-center justify-center text-gold-dark">
+                            <i class="fa-solid fa-graduation-cap text-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-dark">ประวัติการศึกษา</h3>
+                    </div>
+
+                    <div class="relative pl-6 border-l-2 border-gold/30 space-y-8">
+                        <!-- Edu 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-white border-2 border-gold-dark"></div>
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-0.5">มิถุนายน 2561 - ปัจจุบัน</span>
+                            <h4 class="text-lg font-serif font-bold text-dark">ศิลปบัณฑิต (ออกแบบนิเทศศิลป์)</h4>
+                            <p class="text-xs font-semibold text-dark-light">มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (RMUTT)</p>
+                            <p class="text-xs text-dark-light mt-1 leading-relaxed">สาขาออกแบบนิเทศศิลป์ เกรดเฉลี่ยสะสม 3.46 (เกียรตินิยมอันดับ ๒)</p>
+                        </div>
+                        
+                        <!-- Edu 2 -->
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-white border-2 border-gold-dark"></div>
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-0.5">พฤษภาคม 2555 - กุมภาพันธ์ 2560</span>
+                            <h4 class="text-lg font-serif font-bold text-dark">มัธยมศึกษาตอนปลาย</h4>
+                            <p class="text-xs font-semibold text-dark-light">โรงเรียนอุดมวิทยา, ปทุมธานี</p>
+                            <p class="text-xs text-dark-light mt-1">จบการศึกษาด้วยคะแนนเกรดเฉลี่ยสะสม 3.59</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Column -->
+                <div class="lg:col-span-6 space-y-6" data-aos="fade-left">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-cream rounded-xl border border-gold/40 flex items-center justify-center text-gold-dark">
+                            <i class="fa-solid fa-briefcase text-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-dark">ประสบการณ์ทำงานจริง</h3>
+                    </div>
+
+                    <div class="relative pl-6 border-l-2 border-gold/30 space-y-8">
+                        <!-- Exp 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-white border-2 border-gold-dark"></div>                            
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-0.5">มิถุนายน 2564 - มกราคม 2566 </span>
+                            <h4 class="text-lg font-serif font-bold text-dark">Graphic Designer (1 ปี 8 เดือน)</h4>
+                            <p class="text-xs font-semibold text-dark-light">DP PRODUCTS 2555 Co.,Ltd.</p>
+                            <p class="text-xs text-dark-light mt-1 leading-relaxed">Creative Content, Motion Graphic, Editor และลงโพสต์ทุกช่องทางเอง สำหรับแพลตฟอร์ม Facebook, Instagram, TikTok, YouTube และสื่อหน้าร้าน</p>
+                        </div>
+
+                        <!-- Exp 2 -->
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-white border-2 border-gold-dark"></div>
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-0.5">มิถุนายน 2564 - ตุลาคม 2564</span>
+                            <h4 class="text-lg font-serif font-bold text-dark">3D Generalist (นักศึกษาฝึกงาน)</h4>
+                            <p class="text-xs font-semibold text-dark-light">Creative Max Studio Co.,Ltd.</p>
+                            <p class="text-xs text-dark-light mt-1 leading-relaxed">ได้รับโอกาสปั้นโมเดลจำลอง 3D Model และใส่พื้นผิวรายละเอียด (Texture Design) เพื่อประยุกต์ใช้ในการประกอบฉากละครโทรทัศน์แนว CG </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Software Tools & Skills Grid (7 Columns) -->
+            <div class="mt-12 pt-8 border-t border-gold/15">
+                <h4 class="text-center font-serif text-xl font-extrabold mb-6 text-dark">ทักษะความชำนาญทางซอฟต์แวร์</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-paintbrush text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">Adobe Photoshop</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Excellence / Retouch</span>
+                    </div>
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-pen-nib text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">Adobe Illustrator</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Excellence / Vector Layout</span>
+                    </div>
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-wand-magic-sparkles text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">Adobe After Effects</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Good / Motion Graphics</span>
+                    </div>
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-clapperboard text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">Adobe Premiere Pro</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Good / Video Editing</span>
+                    </div>
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-cubes text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">Autodesk Maya</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Fair / 3D Modeling</span>
+                    </div>
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-palette text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">Canva</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Excellence / Social Ads</span>
+                    </div>
+                    <div class="p-4 bg-cream border border-gold/20 rounded-xl flex flex-col items-center justify-center text-center shadow-sm">
+                        <i class="fa-solid fa-scissors text-dark text-2xl mb-3"></i>
+                        <span class="font-bold text-dark text-xs block">CapCut</span>
+                        <span class="text-[9px] text-gold-dark font-black uppercase mt-1">Excellence / TikTok & Reels</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-16 relative">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
+                <span class="text-gold-dark font-serif text-xs tracking-[0.3em] uppercase block font-bold">ผลงานจริงจาก PDF PORTFOLIO</span>
+                <h2 class="text-2xl md:text-4xl font-serif font-bold mt-1">Professional Portfolios</h2>
+                <p class="text-dark-light mt-3">รวบรวมตัวอย่างผลงานของพรนภัส</p>
+                
+                <!-- ปุ่มเชื่อมโยงไปที่ Google Drive คลังโฟลเดอร์หลักพอร์ตโฟลิโอ -->
+                <div class="mt-5">
+                    <a href="https://drive.google.com/drive/folders/17b3zkPYVgccDcxGl_0P7SzJCZ_A7Qza1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2.5 px-6 py-2.5 bg-white/85 hover:bg-gold-light/40 border border-gold/40 text-dark font-bold text-xs rounded-xl transition-all duration-300 shadow-sm group">
+                        <i class="fa-solid fa-folder-open text-gold-dark"></i>
+                        <span>Portfolio (Google Drive)</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gold-dark transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Categories Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" data-aos="fade-up" data-aos-delay="150">
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                
+                <!-- Graphic Design Item 1 -->
+                <div class="portfolio-item-card" data-category="graphic" data-aos="fade-up" data-aos-delay="100">
+                    <div class="group relative overflow-hidden rounded-3xl border border-gold/20 bg-white cursor-pointer shadow-sm"
+                         onclick="openModal('Facebook Promotion Ads Banner', 'Graphic Design', 'https://i.postimg.cc/432vhtXv/Ads-Facebook.jpg', 'Delite Dental Clinic', 'พ.ศ. 2566', 'Photoshop, Illustrator, Premiere Pro', 'ผลงานภาพแบนเนอร์ Ads Facebook สำหรับโปรโมทแคมเปญแบรนด์ทำฟัน', 'https://drive.google.com/drive/folders/1X2FNbnbp4SkkFagf1bhitcnod7O2gHTu?usp=sharing')">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://i.postimg.cc/432vhtXv/Ads-Facebook.jpg" alt="Facebook Promo Banner Design" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                            <div class="absolute inset-0 bg-dark-darker/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-3">
+                                <span class="px-5 py-2.5 bg-cream text-dark text-xs font-bold uppercase tracking-widest rounded-full">ดูข้อมูลคอนเซปต์</span>
+                                <span class="text-xs text-gold underline tracking-wider"><i class="fa-solid fa-link mr-1"></i> ลิงก์ผลงานภาพ</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-1">ตัวอย่างผลงานกราฟิก</span>
+                            <h3 class="text-lg font-bold text-dark group-hover:text-gold-dark transition duration-300">Facebook Promotion Ads Banner Design</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Item 2 -->
+                <div class="portfolio-item-card" data-category="graphic" data-aos="fade-up" data-aos-delay="150">
+                    <div class="group relative overflow-hidden rounded-3xl border border-gold/20 bg-white cursor-pointer shadow-sm"
+                         onclick="openModal('VDO Editor & Motion', 'Graphic Design', 'https://i.postimg.cc/TPvSKzYK/Screenshot-(33).png', 'Delite Dental Clinic', 'พ.ศ. 2566', 'Premiere Pro, After Effects, CapCut', 'ผลงาน Editor/ Motion/ Graphic สื่อวิดีโอประชาสัมพันธ์โปรโมตองค์กรลง Facebook, TikTok, Reels และ YouTube', 'https://drive.google.com/drive/folders/1iVHiN6mZngMXKGtdCc7pdXZjy5SBPX9r?usp=sharing')">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://i.postimg.cc/TPvSKzYK/Screenshot-(33).png" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop';" alt="VDO Editor & Motion" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                            <div class="absolute inset-0 bg-dark-darker/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-3">
+                                <span class="px-5 py-2.5 bg-cream text-dark text-xs font-bold uppercase tracking-widest rounded-full">ดูข้อมูลคอนเซปต์</span>
+                                <span class="text-xs text-gold underline tracking-wider"><i class="fa-solid fa-link mr-1"></i> ลิงก์ผลงานคลิปและภาพ</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-1">ตัวอย่างผลงานกราฟิก</span>
+                            <h3 class="text-lg font-bold text-dark group-hover:text-gold-dark transition duration-300">VDO Editor & Motion Design</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Item 3 -->
+                <div class="portfolio-item-card" data-category="graphic" data-aos="fade-up" data-aos-delay="200">
+                    <div class="group relative overflow-hidden rounded-3xl border border-gold/20 bg-white cursor-pointer shadow-sm"
+                         onclick="openModal('ผลงาน2D/3D/Drawing/สื่ออื่นๆ', 'Graphic Design', 'https://i.postimg.cc/VLKSKwbk/4-House.jpg', 'Personal Collection', 'พ.ศ. 2565 - ปัจจุบัน', 'Photoshop, Illustrator, Maya, Pencil Drawing', 'ผลงาน 2D & 3D ด้วยโปรแกรม Maya/Zbrush งานวาดเส้นมือ และชิ้นงานสื่ออื่นๆ', 'https://drive.google.com/drive/folders/1AQlQh6f-vy8_sVh8MDoMGDvrWZRPbfDJ?usp=sharing')">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://i.postimg.cc/VLKSKwbk/4-House.jpg" alt="ผลงาน2D/3D/Drawing/สื่ออื่นๆ" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+                            <div class="absolute inset-0 bg-dark-darker/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center space-y-3">
+                                <span class="px-5 py-2.5 bg-cream text-dark text-xs font-bold uppercase tracking-widest rounded-full">ดูข้อมูลคอนเซปต์</span>
+                                <span class="text-xs text-gold underline tracking-wider"><i class="fa-solid fa-link mr-1"></i> ลิงก์ผลงานภาพ</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-[10px] text-gold-dark font-black tracking-widest uppercase block mb-1">ตัวอย่างผลงานกราฟิก</span>
+                            <h3 class="text-lg font-bold text-dark group-hover:text-gold-dark transition duration-300">ผลงาน2D/3D/Drawing/สื่ออื่นๆ</h3>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-16 relative">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center max-w-3xl mx-auto mb-10" data-aos="fade-up">
+                <span class="text-gold-dark font-serif text-sm tracking-[0.3em] uppercase block font-bold">ร่วมงานกับเรา</span>
+                <h2 class="text-2xl md:text-4xl font-serif font-bold mt-1">Get In Touch</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6" data-aos="fade-right">
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-serif font-bold text-dark">ข้อมูลติดต่อด่วน</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Line Official -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-xl border border-gold/30 flex items-center justify-center text-[#06C755] shadow-sm animate-pulse">
+                                <i class="fa-brands fa-line text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-dark-light block uppercase tracking-wider font-semibold">Line Official</span>
+                                <a href="https://lin.ee/6BKDVvL" target="_blank" rel="noopener noreferrer" class="text-dark font-bold text-sm hover:text-gold transition">คลิก@LINEเพื่อติดต่องาน</a>
+                            </div>
+                        </div>
+
+                        <!-- Line ส่วนตัว -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-xl border border-gold/30 flex items-center justify-center text-[#06C755] shadow-sm">
+                                <i class="fa-brands fa-line text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-dark-light block uppercase tracking-wider font-semibold">Line ส่วนตัว</span>
+                                <a href="https://line.me/ti/p/Y23DjxhI-y" target="_blank" rel="noopener noreferrer" class="text-dark font-bold text-sm hover:text-gold transition">คลิก@LINEเพื่อติดต่องาน</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-xl border border-gold/30 flex items-center justify-center text-gold-dark shadow-sm">
+                                <i class="fa-solid fa-envelope text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-dark-light block uppercase tracking-wider font-semibold">อีเมลทางการ</span>
+                                <a href="mailto:phonnaphatramanjit@gmail.com" class="text-dark font-bold text-sm hover:text-gold transition">phonnaphatramanjit@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-xl border border-gold/30 flex items-center justify-center text-gold-dark shadow-sm">
+                                <i class="fa-solid fa-mobile-screen-button text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-dark-light block uppercase tracking-wider font-semibold">เบอร์ติดต่องาน</span>
+                                <a href="tel:0958422094" class="text-dark font-bold text-sm hover:text-gold transition">095-842-2094</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Column -->
+                <div class="lg:col-span-7" data-aos="fade-left">
+                    <form id="contactForm" class="p-6 md:p-8 bg-white border border-gold/20 rounded-[2rem] shadow-sm space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="formName" class="block text-xs font-bold uppercase tracking-wider text-dark mb-1.5">ชื่อของคุณ / ชื่อหน่วยงาน</label>
+                                <input type="text" id="formName" required placeholder="เช่น คุณณรงค์ชัย รักชาติ" 
+                                       class="w-full px-4 py-3 bg-cream/40 border border-gold/20 rounded-xl focus:outline-none focus:border-gold-dark focus:bg-white text-xs transition">
+                            </div>
+                            <div>
+                                <label for="formEmail" class="block text-xs font-bold uppercase tracking-wider text-dark mb-1.5">อีเมลติดต่อกลับ</label>
+                                <input type="email" id="formEmail" required placeholder="เช่น narong@company.com" 
+                                       class="w-full px-4 py-3 bg-cream/40 border border-gold/20 rounded-xl focus:outline-none focus:border-gold-dark focus:bg-white text-xs transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="formMessage" class="block text-xs font-bold uppercase tracking-wider text-dark mb-1.5">อธิบายวัตถุประสงค์และรูปแบบงานที่ต้องการ</label>
+                            <textarea id="formMessage" rows="4" required placeholder="เช่น ต้องการให้ออกแบบป้ายโฆษณา Ads สินค้าหน้าร้าน, วาดแบร้งดิ้ง หรือสร้างวิดีโอ Motion Content..." 
+                                      class="w-full px-4 py-3 bg-cream/40 border border-gold/20 rounded-xl focus:outline-none focus:border-gold-dark focus:bg-white text-xs transition"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 bg-dark text-cream rounded-xl text-xs font-bold uppercase tracking-widest border border-dark hover:bg-gold hover:text-dark hover:border-gold transition duration-500 shadow-md">
+                            ส่งข้อความแจ้งคุณทิพย์
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark-darker text-cream py-8 border-t border-gold/10">
+        <div class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl font-serif font-black tracking-widest">PHONNAPHAT<span class="text-gold">.</span></span>
+            </div>
+            
+            <p class="text-[11px] text-cream/40">© 2026 Phonnaphat Ramanjit.</p>
+            
+            <div class="flex space-x-3">
+                <a href="https://line.me/ti/p/Y23DjxhI-y" target="_blank" class="w-7 h-7 rounded-full bg-cream/5 border border-cream/10 flex items-center justify-center hover:bg-gold hover:text-dark transition text-[#06C755] hover:text-dark" aria-label="Line Personal"><i class="fa-brands fa-line text-sm"></i></a>
+                <a href="https://instagram.com/tip.phonnaphat" target="_blank" class="w-7 h-7 rounded-full bg-cream/5 border border-cream/10 flex items-center justify-center hover:bg-gold hover:text-dark transition" aria-label="Instagram"><i class="fa-brands fa-instagram text-xs"></i></a>
+                <a href="mailto:phonnaphatramanjit@gmail.com" class="w-7 h-7 rounded-full bg-cream/5 border border-cream/10 flex items-center justify-center hover:bg-gold hover:text-dark transition" aria-label="Email"><i class="fa-solid fa-envelope text-xs"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTop" class="fixed bottom-6 right-6 w-10 h-10 bg-dark text-cream border border-gold/30 rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50 hover:bg-gold hover:text-dark" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up text-xs"></i>
+    </button>
+
+    <!-- SUCCESS TOAST NOTIFICATION -->
+    <div id="toastSuccess" class="fixed bottom-6 left-6 dark-glass-card p-4 rounded-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-500 z-[9999]">
+        <div class="w-8 h-8 rounded-lg bg-gold/10 border border-gold/40 flex items-center justify-center text-gold"><i class="fa-solid fa-circle-check text-base"></i></div>
+        <div>
+            <h5 class="text-xs font-bold text-cream">ข้อมูลติดต่อถูกส่งเรียบร้อยแล้วค่ะ!</h5>
+            <p class="text-[9px] text-cream/60">ทิพย์จะรีบตอบกลับผ่านทางอีเมลของท่านโดยเร็วที่สุดค่ะ</p>
+        </div>
+    </div>
+
+    <!-- CASE STUDY PREVIEW MODAL -->
+    <div id="projectModal" class="fixed inset-0 z-[99999] flex items-center justify-center px-6 py-10 opacity-0 invisible transition-all duration-500">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-dark-darker/80 backdrop-blur-md cursor-pointer" onclick="closeModal()"></div>
+        
+        <!-- Box Content -->
+        <div class="relative w-full max-w-4xl dark-glass-card rounded-[2.5rem] overflow-hidden shadow-2xl z-10 max-h-[85vh] overflow-y-auto transform scale-95 transition-transform duration-500" id="modal-box">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-cream/10 hover:bg-gold hover:text-dark transition flex items-center justify-center text-cream text-sm z-20">✕</button>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+                <div class="lg:col-span-6 h-56 lg:h-full min-h-[250px]">
+                    <img src="" id="modal-project-img" class="w-full h-full object-cover" alt="รายละเอียดงานจริง" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop';">
+                </div>
+                <div class="lg:col-span-6 p-6 md:p-8 space-y-4 text-cream flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-[10px] text-gold font-black tracking-widest uppercase block mb-1" id="modal-project-cat">Category</span>
+                            <h3 class="text-xl md:text-2xl font-serif font-bold" id="modal-project-title">Title Project</h3>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 p-3 bg-cream/5 border border-gold/10 rounded-xl text-[11px] text-cream/80">
+                            <div>
+                                <span class="text-cream/40 block mb-0.5">ลูกค้า / แบรนด์</span>
+                                <span class="font-bold text-cream" id="modal-project-client">Client</span>
+                            </div>
+                            <div>
+                                <span class="text-cream/40 block mb-0.5">ปีที่ผลิต</span>
+                                <span class="font-bold text-gold" id="modal-project-year">Year</span>
+                            </div>
+                            <div class="col-span-2">
+                                <span class="text-cream/40 block mb-0.5">ซอฟต์แวร์และเครื่องมือที่ใช้</span>
+                                <span class="font-bold text-cream" id="modal-project-tools">Tools</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <span class="text-[10px] text-cream/40 font-bold block uppercase tracking-wider">ภาพรวมแนวคิดการออกแบบ</span>
+                            <p class="text-xs text-cream/70 leading-relaxed font-light" id="modal-project-desc">Description of the project context.</p>
+                        </div>
+                    </div>
+
+                    <!-- ลิงก์เข้าชมผลงาน -->
+                    <div class="space-y-3 pt-3 border-t border-cream/10 flex flex-wrap gap-3 items-center justify-between">
+                        <div id="modal-link-container" class="hidden">
+                            <a href="" id="modal-project-link" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2.5 bg-gold/20 hover:bg-gold text-cream hover:text-dark border border-gold/40 text-[10px] font-bold uppercase tracking-widest rounded-lg transition duration-300">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                <span>เปิดดูลิงก์ผลงานภาพความละเอียดสูง</span>
+                            </a>
+                        </div>
+                        <button onclick="closeModal()" class="px-4 py-2.5 bg-gold hover:bg-gold-dark text-dark text-[10px] font-bold uppercase tracking-widest rounded-lg transition duration-300">
+                            ปิดหน้าต่างพรีวิว
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS & Vanilla JS Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // เริ่มการทำงานระบบแอนิเมชันเมื่อเลื่อนหน้าเจอ (AOS)
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+
+        // 1. จัดการ Loading Screen
+        window.addEventListener('load', () => {
+            const progress = document.getElementById('load-progress');
+            const loader = document.getElementById('loader');
+            
+            if(progress) progress.style.width = '100%';
+            
+            setTimeout(() => {
+                if(loader) {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                }
+            }, 1200);
+        });
+
+        // 2. จัดการเปลี่ยนสถานะ Navbar สีทองครีมเมื่อเลื่อนหน้าจอลงมา
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 45) {
+                nav.classList.add('bg-cream/95', 'backdrop-blur-md', 'shadow-md', 'py-4');
+                nav.classList.remove('py-5');
+            } else {
+                nav.classList.remove('bg-cream/95', 'backdrop-blur-md', 'shadow-md', 'py-4');
+                nav.classList.add('py-4');
+            }
+        });
+
+        // 3. ปรับแต่ง Mouse Glow (Desktop Follow Cursor)
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            if(glow) {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+            }
+        });
+
+        // 4. จัดการ Hamburger และ Drawer บนจอมือถือ
+        const menuBtn = document.getElementById('menu-btn');
+        const sideDrawer = document.getElementById('side-drawer');
+        const bar1 = document.getElementById('bar1');
+        const bar2 = document.getElementById('bar2');
+        const bar3 = document.getElementById('bar3');
+        let isDrawerOpen = false;
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                isDrawerOpen = !isDrawerOpen;
+                if (isDrawerOpen) {
+                    sideDrawer.classList.remove('translate-x-full');
+                    bar1.classList.add('transform', 'rotate-45', 'translate-y-2');
+                    bar2.classList.add('opacity-0');
+                    bar3.classList.add('transform', '-rotate-45', '-translate-y-2');
+                } else {
+                    sideDrawer.classList.add('translate-x-full');
+                    bar1.classList.remove('transform', 'rotate-45', 'translate-y-2');
+                    bar2.classList.remove('opacity-0');
+                    bar3.classList.remove('transform', '-rotate-45', '-translate-y-2');
+                }
+            });
+        }
+
+        document.querySelectorAll('#side-drawer a').forEach(link => {
+            link.addEventListener('click', () => {
+                isDrawerOpen = false;
+                sideDrawer.classList.add('translate-x-full');
+                bar1.classList.remove('transform', 'rotate-45', 'translate-y-2');
+                bar2.classList.remove('opacity-0');
+                bar3.classList.remove('transform', '-rotate-45', '-translate-y-2');
+            });
+        });
+
+        // 5. คัดกรองผลงานพอร์ตโฟลิโอ (Portfolio Filter Categories)
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-item-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('bg-dark', 'text-cream'));
+                filterBtns.forEach(b => b.classList.add('text-dark'));
+                btn.classList.add('bg-dark', 'text-cream');
+                btn.classList.remove('text-dark');
+
+                const filter = btn.getAttribute('data-filter');
+
+                portfolioCards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    if (filter === 'all' || cat === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 400);
+                    }
+                });
+            });
+        });
+
+        // 6. ดึงข้อมูลจริงขึ้นโชว์บน Modal ตัวอย่างผลงานพรีวิว
+        const modal = document.getElementById('projectModal');
+        const modalBox = document.getElementById('modal-box');
+        
+        function openModal(title, category, image, client, year, tools, desc, linkUrl = '') {
+            document.getElementById('modal-project-title').textContent = title;
+            document.getElementById('modal-project-cat').textContent = category;
+            
+            const modalImg = document.getElementById('modal-project-img');
+            modalImg.src = image;
+            modalImg.onerror = function() {
+                this.onerror = null;
+                this.src = 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1200&auto=format&fit=crop';
+            };
+            
+            document.getElementById('modal-project-client').textContent = client;
+            document.getElementById('modal-project-year').textContent = year;
+            document.getElementById('modal-project-tools').textContent = tools;
+            document.getElementById('modal-project-desc').textContent = desc;
+
+            const linkContainer = document.getElementById('modal-link-container');
+            const projectLink = document.getElementById('modal-project-link');
+            
+            if (linkUrl && linkUrl.trim() !== '') {
+                projectLink.href = linkUrl;
+                linkContainer.classList.remove('hidden');
+            } else {
+                linkContainer.classList.add('hidden');
+                projectLink.href = '';
+            }
+
+            modal.classList.remove('opacity-0', 'invisible');
+            setTimeout(() => {
+                modalBox.classList.remove('scale-95');
+                modalBox.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeModal() {
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'invisible');
+            }, 300);
+        }
+
+        // 7. จัดการปุ่ม Back To Top เมื่อเลื่อนหน้าจอลงมาลึกๆ
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 450) {
+                backBtn.classList.add('opacity-100', 'visible');
+                backBtn.classList.remove('opacity-0', 'invisible');
+            } else {
+                backBtn.classList.remove('opacity-100', 'visible');
+                backBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        if(backBtn) {
+            backBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // 8. จัดการฟอร์มติดต่อกลับจำลอง (Contact submit Action)
+        const form = document.getElementById('contactForm');
+        const toast = document.getElementById('toastSuccess');
+
+        if(form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2 text-xs"></i> กำลังส่งข้อมูลโครงการ...';
+
+                setTimeout(() => {
+                    form.reset();
+                    btn.disabled = false;
+                    btn.textContent = 'ส่งข้อความแจ้งคุณทิพย์';
+                    
+                    // Show Success Toast
+                    if(toast) {
+                        toast.classList.remove('translate-y-24', 'opacity-0');
+                        toast.classList.add('translate-y-0', 'opacity-100');
+
+                        setTimeout(() => {
+                            toast.classList.add('translate-y-24', 'opacity-0');
+                            toast.classList.remove('translate-y-0', 'opacity-100');
+                        }, 5000);
+                    }
+                }, 1200);
+            });
+        }
+    </script>
+</body>
+</html>
